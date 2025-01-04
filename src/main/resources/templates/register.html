@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <link rel="stylesheet" href="/css/register.css">
+</head>
+<body>
+    <div class="register-container">
+        <h2>Sign up</h2>
+        <form action="/register" method="post" th:object="${user}" novalidate>
+            <label for="firstName">First Name</label>
+            <input type="text" th:field="*{firstName}" id="firstName" name="firstName" required placeholder="Enter First Name">
+            <span style="color: red;" th:errors="*{firstName}"> size must be between 3-10</span>
+
+
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" th:field="*{lastName}" name="lastName" required placeholder="Enter Last Name">
+            <span style="color: red;" th:errors="*{lastName}"></span>
+
+
+            <label for="username">Username</label>
+            <input type="text" id="username" th:field="*{username}" name="username" required placeholder="Enter Username">
+            <span style="color: red;" th:errors="*{username}"></span>
+
+            
+            <label for="email">Email</label>
+            <input type="email" id="email" th:field="*{email}" name="email" required placeholder="Enter Email">
+            <span style="color: red;" th:errors="*{email}"></span>
+
+
+            <label for="mobile">Mobile</label>
+            <input type="tel" id="mobile" th:field="*{mobile}" name="mobile" required placeholder="Enter Mobile Number">
+            <span style="color: red;" th:errors="*{mobile}"></span>
+
+
+            <label for="password">Password</label>
+            <input type="password" id="password" th:field="*{password}" name="password" required placeholder="Enter Password">
+            <span style="color: red;" th:errors="*{password}"></span>
+
+
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="text" id="confirm-password" th:field="*{confirmPassword}" name="confirmPassword" required placeholder="Confirm Password">
+            <span style="color: red;" th:errors="*{confirmPassword}"></span>
+
+
+            <div id="gender-radio">
+                <label>Gender</label>
+                <input type="radio" id="male" th:field="*{gender}" name="gender" value="male" required>
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="female" required>
+                <label for="female">Female</label>
+                <input type="radio" id="other" name="gender" value="other" required>
+                <label for="other">other</label>
+                <span style="color: red;" th:errors="*{gender}"></span>
+
+            </div>
+            
+            <button type="submit">Sign Up</button>
+        </form>
+        <div id="login-link">
+            <p>Already have an account?</p>
+            <a href="/login">
+                <button>Login</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
