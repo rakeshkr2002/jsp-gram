@@ -46,4 +46,9 @@ public class AppController {
 	public String verifyOtp(@RequestParam int otp,@RequestParam int id,HttpSession session) {
 		return service.verifyOtp(otp,id,session);
 	}
+
+	@GetMapping("/resend-otp/{id}")
+	public String resendOtp(@PathVariable int id, HttpSession session) {
+		return service.resendOtp(id, session);
+	}
 }

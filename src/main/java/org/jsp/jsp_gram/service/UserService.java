@@ -67,5 +67,16 @@ public class UserService {
 		}
 
 	}
+
+	public String resendOtp(int id, HttpSession session) {
+	User user = repository.findById(id).get();
+	int otp = new Random().nextInt(100000,1000000);
+	user.setOtp(otp);
+	System.err.println(otp);
+	emailSender.sendOtp(user.getEmail(), otp, user.getFirstName());
+    repository.save(user);
+	session.setAttribute("pass", "otp Resent- successfully sent");
+		return "redirect:/otp/" + user.getId();
+	}
 	
 }
