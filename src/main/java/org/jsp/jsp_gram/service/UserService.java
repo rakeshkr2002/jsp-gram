@@ -78,5 +78,49 @@ public class UserService {
 	session.setAttribute("pass", "otp Resent- successfully sent");
 		return "redirect:/otp/" + user.getId();
 	}
-	
+
+	//login
+	public String login(String username, String password,HttpSession session) {
+		User user=repository.findByUsername(username);
+		if (user != null) {
+	      if(password.equals(AES.decrypt(user.getPassword()))){
+              if (user.isVerified()) {
+				session.setAttribute("user", user);
+					session.setAttribute("pass", "Login Success");
+					return "redirect:/home";
+			  }else{
+				int otp = new Random().nextInt(100000,1000000);
+				user.setOtp(otp);
+				System.err.println(otp);
+				emailSender.sendOtp(user.getEmail(), otp, user.getFirstName());
+   				 repository.save(user);
+				session.setAttribute("pass", "otp sent- successfully sent,first verify email to login");
+				  return "redirect:/otp/"+user.getId();
+			  }
+		  }else{
+			session.setAttribute("fail", "Invalid Password ");
+			  return "redirect:/login";
+		  }
+		}else{
+			session.setAttribute("fail", "Invalid Username ");
+			return "redirect:/login";
+		}
+	}
+
+
+	public String loadHome(HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		if (user != null)
+		return "redirect:/home";
+		else {
+			session.setAttribute("fail", "Invalid Session");
+			return "redirect:/login";
+			
+		}
+	}
+	public String logout(HttpSession session) {
+		session.removeAttribute("user");
+		session.setAttribute("pass", "Logout Success");
+		return "redirect:/login";
+	}
 }

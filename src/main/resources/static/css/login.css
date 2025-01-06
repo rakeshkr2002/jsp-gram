@@ -1,128 +1,131 @@
-/* body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+:root {
+    --primary-color: #0095f6;
+    --secondary-color: #00376b;
+    --background-color: #fafafa;
+    --error-color: #ed4956;
+    --success-color: #2ecc71;
 }
-.login-container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-}
-.login-container h2 {
-    margin-bottom: 20px;
-    text-align: center;
-}
-.login-container label {
-    display: block;
-    margin-bottom: 5px;
-}
-.login-container input[type="text"],
-.login-container input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    margin-right: 10px;
-}
-.login-container button {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-}
-.login-container button:hover {
-    background-color: #45a049;
-}
-.login-container .register-link {
-    display: block;
-    text-align: center;
-    margin-top: 10px;
-    color: #007BFF;
-    text-decoration: none;
-}
-.login-container .register-link:hover {
-    text-decoration: underline;
-} */
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-.login-container{
-    width: 100%;
-    height: 55vh;
+body {
+    background-color: var(--background-color);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column ;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    margin: 100px auto;
-
+    min-height: 100vh;
 }
 
-.login-container h2{
-    margin-bottom: 20px;
+.logo {
+    margin-bottom: 2rem;
+}
+
+.logo img {
+    width: 175px;
+    height: auto;
+}
+
+.login-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1px;
+    border: 1px solid #dbdbdb;
+    width: 100%;
+    max-width: 350px;
+    margin-bottom: 1rem;
+}
+
+.message {
+    margin-bottom: 1rem;
     text-align: center;
 }
-.login-container label{
-    display: block;
-    margin-bottom: 5px;
+
+.success-message {
+    color: var(--success-color);
 }
-.login-container input{
+
+.error-message {
+    color: var(--error-color);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
+    padding: 0.75rem;
+    background-color: #fafafa;
+    border: 1px solid #dbdbdb;
     border-radius: 3px;
+    font-size: 0.875rem;
 }
-.login-container button{
+
+.form-group input:focus {
+    outline: none;
+    border-color: #a8a8a8;
+}
+
+.login-button {
     width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
+    padding: 0.5rem;
+    background-color: var(--primary-color);
     color: white;
     border: none;
-    border-radius: 3px;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 600;
     cursor: pointer;
+    transition: background-color 0.2s ease;
 }
-.login-container button:hover{
-    background-color: #45a049;
-}
-.login-container .register-link{
-    display: block;
-    text-align: center;
-    margin-top: 10px;
-    color: #007BFF;
-    text-decoration: none;
- } 
- .login-container .register-link:hover{
-        text-decoration: underline;
- }
- #register-link{
-    margin-top: 10px;
-    color: #007BFF;
-    text-decoration: none;
- }
- #register-link p:first-child{
-    margin-bottom: 10px;
 
- }
- body{
-    background-image: url("../images/mesh-757.png");
-    /* background-position: 100% center; */
-    background-repeat: no-repeat;
-    font-size: 20px;
-   
- }
+.login-button:hover {
+    background-color: #0081d6;
+}
+
+.register-container {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 1px;
+    border: 1px solid #dbdbdb;
+    width: 100%;
+    max-width: 350px;
+    text-align: center;
+}
+
+.register-link {
+    color: var(--secondary-color);
+    font-size: 0.875rem;
+}
+
+.register-link a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.footer {
+    margin-top: 2rem;
+    color: #8e8e8e;
+    font-size: 0.75rem;
+    text-align: center;
+}
+
+@media (max-width: 450px) {
+
+    .login-container,
+    .register-container {
+        border: none;
+        background: transparent;
+    }
+
+    body {
+        background-color: white;
+    }
+}

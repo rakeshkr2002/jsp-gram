@@ -1,29 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link rel="stylesheet" href="/css/login.css">
-</head>
-<body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form action="/login" method="post">
-            <label for="username"> <img src="/images/user.png" alt="" height="20px" width="20px"> Username </label>
-            <input type="text" id="username" name="username" required placeholder="Enter Username">
-            <label for="password"><img src="/images/password.png" alt="" height="20px" width="20px"> Password</label>
-            <input type="password" id="password" name="password" required placeholder="Enter Password">
-            <button type="submit">Login</button>
-        </form>
-      
-<div id="register-link">
-    <p>Don't have account ?</p>
-    <a href="/register">
-        <button>Register</button>
-    </a>
-</div>
+    <meta name="description" content="Login to JspGram - Share your moments">
+    <title>JspGram - Login</title>
 
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+<link rel="stylesheet" href="/css/login.css">
+  
+    
+</head>
+
+<body>
+    <div class="logo">
+        <img src="/images/jspgram-logo.png" alt="JspGram Logo">
     </div>
+
+    <div class="message">
+        <h3 class="success-message" th:text="${session.pass}"></h3>
+        <h3 class="error-message" th:text="${session.fail}"></h3>
+        <th:block th:text="${@messageRemover.remove()}"></th:block>
+    </div>
+
+    <div class="login-container">
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <input type="text" id="username" name="username" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="login-button">Log In</button>
+        </form>
+    </div>
+
+    <div class="register-container">
+        <p class="register-link">Don't have an account? <a href="/register">Sign up</a></p>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 JspGram</p>
+    </footer>
 </body>
+
 </html>
