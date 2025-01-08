@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="/css/profile.css">
+</head>
+<body>
+    <nav>
+        <div class="home">
+          <img src="/images/jspgram-logo.png" alt="" height="120px">
+        </div>
+        <div class="menu">
+            <a href="/home"> <button>home</button> </a>
+            <a href="/logout"> <button>Logout</button> </a>
+        </div>
+    </nav>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-image">
+                
+                <img th:if="${session.user.imageUrl==null}"  src="https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png" alt="Profile Picture" class="profile-picture">
+                <img th:if="${session.user.imageUrl}"  th:src="${session.user.imageUrl}" alt="Profile Picture" class="profile-picture">
+            </div>
+            <div class="profile-info">
+                <h1 th:text="${session.user.firstName}"></h1>
+                <h2 th:text="${session.user.email}"></h2>
+                 <p>bio: <th:block th:text="${session.user.bio}"></th:block> </p>
+                  
+                <button><a href="/edit-profile">Edit Profile</a></button>
+            </div>
+        </div>
+
+
+        <div class="profile-stats">
+            <div>
+                <h3>Posts</h3>
+                <p >0</p>
+            </div>
+            <div>
+                <h3>Following</h3>
+                <p>0</p>
+            </div>
+            <div>
+                <h3>Followers</h3>
+                <p>0</p>
+            </div>
+        </div>
+        <div class="profile-posts">
+            <h1>My Posts</h1>
+            <button><a href="/add-post">Add New Post</a></button>
+        </div>
+        
+       
+        
+    </div>
+</body>
+</html>

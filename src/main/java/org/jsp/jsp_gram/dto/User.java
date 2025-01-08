@@ -42,4 +42,7 @@ public class User {
     private String gender;
 	private int otp;
 	private boolean verified;
+    private String imageUrl;
+    private String bio;
+
 }
