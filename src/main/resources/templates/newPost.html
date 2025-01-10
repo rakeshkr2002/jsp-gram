@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Post - JSP Gram</title>
+    <link rel="stylesheet" href="css/newPost.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Create a New Post</h1>
+        <form action="/add-post" method="post" enctype="multipart/form-data">
+            <label for="imageUrl">Image:</label>
+            <input type="file" id="imageUrl" name="file" required>
+            <label for="caption">Caption:</label>
+            <input type="text" id="caption" name="caption">
+            <button type="submit">Update</button>
+        </form><br>
+        <a href="/home">  <button>home</button></a>
+       
+    </div>
+</body>
+</html>

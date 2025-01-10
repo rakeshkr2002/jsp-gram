@@ -1,12 +1,15 @@
 package org.jsp.jsp_gram.service;
 
+import java.util.List;
 import java.util.Random;
 
+import org.jsp.jsp_gram.dto.Posts;
 import org.jsp.jsp_gram.dto.User;
 import org.jsp.jsp_gram.helper.AES;
 import org.jsp.jsp_gram.helper.CloudinaryHelper;
 import org.jsp.jsp_gram.helper.EmailSender;
 import org.jsp.jsp_gram.repository.UserRepository;
+import org.jsp.jsp_gram.repository.postRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
@@ -23,6 +26,8 @@ public class UserService {
 	EmailSender emailSender;
 	@Autowired
 	UserRepository repository;
+	@Autowired
+	 postRepository postRepository;
 
 	@Autowired
 	CloudinaryHelper cloudinaryHelper;
@@ -129,14 +134,16 @@ public class UserService {
 		return "redirect:/login";
 	}
 
-    public String loadProfile(HttpSession session) {
+    public String loadProfile(HttpSession session,ModelMap map) {
 		User user = (User) session.getAttribute("user");
-		if (user != null)
+		if (user != null){
+		List<Posts> posts = postRepository.findByUser(user);
+		map.addAttribute("posts", posts);
 			return "profile.html";
+		}
 		else {
 			session.setAttribute("fail", "Invalid Session");
 			return "redirect:/login";
-			
 		}
 	    }
 
@@ -164,4 +171,40 @@ public class UserService {
 		}
 	
 	}
+
+
+	public String addPost(HttpSession session, MultipartFile file, String caption) {
+		User user = (User) session.getAttribute("user");
+		if (user != null) {
+			try {
+				Posts post = new Posts();
+				post.setCaption(caption);
+				post.setImageUrl(cloudinaryHelper.saveImage(file));
+				post.setUser(user);
+				postRepository.save(post);
+				return "redirect:/profile";
+			} catch (Exception e) {
+				// Log the exception and set an error message
+				session.setAttribute("error", "Failed to create post. Please try again.");
+				e.printStackTrace();
+				return "redirect:/newPost";
+			}
+		} else {
+			session.setAttribute("fail", "Invalid Session");
+			return "redirect:/login";
+		}
+	}
+	
+
+
+
+	public String loadPost(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            return "newPost";
+        } else {
+            session.setAttribute("fail", "Invalid Session");
+            return "redirect:/login";
+        }
+    }
 }

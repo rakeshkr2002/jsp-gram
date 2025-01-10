@@ -69,8 +69,8 @@ public class AppController {
 	}
 
 	@GetMapping("/profile")
-	public String loadProfile(HttpSession session){
-		return service.loadProfile(session);
+	public String loadProfile(HttpSession session,ModelMap map){
+		return service.loadProfile(session,map);
 	}
 	@GetMapping("/edit-profile")
 	public String editProfile(HttpSession session){
@@ -80,6 +80,14 @@ public class AppController {
 	@PostMapping("/update-profile")
 	public String updateProfile(HttpSession session,@RequestParam MultipartFile image,@RequestParam String bio) {
 		return service.updateProfile(session,image,bio);
+	}
+	@PostMapping("/add-post")
+	public String addPost(HttpSession session,@RequestParam MultipartFile file,@RequestParam String caption){
+		return service.addPost(session,file,caption);
+	}
+	@GetMapping("/add-post")
+	public String loadPost(HttpSession session){
+		return service.loadPost(session);
 	}
 
 }

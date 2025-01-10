@@ -20,19 +20,28 @@
     <div class="profile-container">
         <div class="profile-header">
             <div class="profile-image">
-                
                 <img th:if="${session.user.imageUrl==null}"  src="https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png" alt="Profile Picture" class="profile-picture">
                 <img th:if="${session.user.imageUrl}"  th:src="${session.user.imageUrl}" alt="Profile Picture" class="profile-picture">
             </div>
             <div class="profile-info">
-                <h1 th:text="${session.user.firstName}"></h1>
+                <div>
+                <h1 th:text="${session.user.firstName}+' '+${session.user.lastName}" ></h1>
+                
+               </div>
+               <div>
                 <h2 th:text="${session.user.email}"></h2>
-                 <p>bio: <th:block th:text="${session.user.bio}"></th:block> </p>
-                  
-                <button><a href="/edit-profile">Edit Profile</a></button>
+               </div>
+               <div>
+                 <p>Bio: <th:block th:text="${session.user.bio}"></th:block> </p>
+                </div>
+                <div>
+                    <button><a href="/edit-profile">Edit Profile</a></button>
+
+                </div>
             </div>
         </div>
-
+        <br>
+<hr>
 
         <div class="profile-stats">
             <div>
@@ -48,13 +57,29 @@
                 <p>0</p>
             </div>
         </div>
+
+        <br>
+        <hr>
         <div class="profile-posts">
             <h1>My Posts</h1>
             <button><a href="/add-post">Add New Post</a></button>
         </div>
+        <br>
+       <hr>
+      
+             <div class="posts-container">
+                 <div th:each="post : ${posts}" class="post-item">
+                     <img th:src="${post.imageUrl}" alt="Post Image" class="post-image">
+                      <p th:text="${post.caption}"></p>
+                     
+                 </div> 
+             </div> 
+
+
+            
+       </div>
+            
         
-       
-        
-    </div>
+       </div>
 </body>
 </html>
