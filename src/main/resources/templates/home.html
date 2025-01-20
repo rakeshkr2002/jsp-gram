@@ -29,12 +29,15 @@
     <div class="container">
         <div th:if="${posts}">
             <div th:each="post:${posts}">
-                <img height="50px" width="50px" th:src="${post.user.imageUrl}">
-                <span th:text="${post.user.username}"></span>
+                <img th:if="${post.user.imageUrl!=null}" height="50px" width="50px" th:src="${post.user.imageUrl}">
+                <img th:if="${post.user.imageUrl==null}" height="50px" width="50px" src="https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png" alt="Profile Picture" class="profile-picture">         
+                       <span th:text="${post.user.username}"></span>
                 <img height="250px" width="250px" th:src="${post.imageUrl}">
                 <span th:text="${post.caption}"></span>
                 <span th:text="${post.postedTime}"></span>
-                <button>Like</button>
+                <span th:text="${post.likedUsers.size()}+'Likes'"></span>
+                <a th:if="${!post.hasLiked(session.user.id)}" th:href="'/like/'+${post.id}"><button>Like</button></a>
+                <a th:if="${post.hasLiked(session.user.id)}" th:href="'/dislike/'+${post.id}"><button>Dis-Like</button></a>
                 <button>Comment</button>
             </div>
         </div>

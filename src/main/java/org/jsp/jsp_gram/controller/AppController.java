@@ -134,4 +134,13 @@ public class AppController {
 	public String viewProfile(@PathVariable int id,HttpSession session,ModelMap map) {
 		return service.viewProfile(id,session,map);
 	}
+	@GetMapping("/like/{id}")
+	public String likePost(@PathVariable int id,HttpSession session) {
+		return service.likePost(id,session);
+	}
+	
+	@GetMapping("/dislike/{id}")
+	public String dislikePost(@PathVariable int id,HttpSession session) {
+		return service.dislikePost(id,session);
+	}
 }
