@@ -57,13 +57,13 @@
                 <span th:if="${posts}" th:text="${posts.size()}"></span>
             </div>
             <div>
-                <h3>Followers</h3>
                 
+                <a href="/followers" ><h3 style="color: black;">Followers</h3></a>
                 <span th:text="${session.user.followers.size()}"></span>
             </div>
             <div>
-                <h3>Following</h3>
-               
+                
+                <a href="/following"><h3 style="color: black;">Following</h3></a>
                 <span th:text="${session.user.following.size()}"></span>
             </div>
             <div class="stat-item">
