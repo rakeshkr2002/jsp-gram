@@ -84,8 +84,8 @@
                  <div th:each="post : ${posts}" class="post-item">
                      <img th:src="${post.imageUrl}" alt="Post Image" class="post-image">
                       <p th:text="${post.caption}"></p>
-                      <button>Edit</button>
-                <a th:href="'/delete/'+${post.id}"><button>Delete</button></a>
+                      <a th:href="'/edit/'+${post.id}"><button>Edit</button></a>
+                      <a th:href="'/delete/'+${post.id}"><button onclick="confirm('Are you sure you want to delete?')">Delete</button></a>
                  </div> 
              </div> 
 

@@ -4,12 +4,14 @@ import java.time.LocalDateTime;
 
 
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
 import lombok.Data;
 
 @Entity
@@ -25,5 +27,7 @@ public class Posts {
     private LocalDateTime  postedTime;
     @ManyToOne
    private User user;
+   @Transient
+	private MultipartFile image;
 
 }

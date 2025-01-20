@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.jsp.jsp_gram.dto.Posts;
 import org.jsp.jsp_gram.dto.User;
 import org.jsp.jsp_gram.service.UserService;
 
@@ -103,5 +104,14 @@ public class AppController {
 	@GetMapping("/suggestions")
 	public String suggestions(HttpSession session,ModelMap map){
 		return service.viewSuggestions(session,map);
+	}
+
+	@GetMapping("/edit/{id}")
+	public String edit(@PathVariable int id, HttpSession session, ModelMap map) {
+		return service.editPost(id, session, map);
+	}
+	@PostMapping("/update-post")
+	public String updatePost(Posts post, HttpSession session) throws Exception {
+		return service.updatePost(post, session);
 	}
 }
