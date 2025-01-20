@@ -120,10 +120,15 @@ public class UserService {
 	
 
 
-	public String loadHome(HttpSession session) {
+	public String loadHome(HttpSession session,ModelMap map) {
 		User user = (User) session.getAttribute("user");
-		if (user != null)
+		if (user != null){
+		List<User> users = user.getFollowing();
+			List<Posts> posts=postRepository.findByUserIn(users);
+			if(!posts.isEmpty())
+			map.put("posts", posts);
 			return "home.html";
+		}
 		else {
 			session.setAttribute("fail", "Invalid Session");
 			return "redirect:/login";
@@ -360,4 +365,19 @@ public class UserService {
 		}
 	}
 
+
+	public String viewProfile(int id, HttpSession session, ModelMap map) {
+		User user = (User) session.getAttribute("user");
+		if (user != null) {
+			User checkedUser=repository.findById(id).get();
+			List<Posts> posts = postRepository.findByUser(checkedUser);
+			if (!posts.isEmpty())
+				map.put("posts", posts);
+			map.put("user", checkedUser);
+			return "view-profile.html";
+		} else {
+			session.setAttribute("fail", "Invalid Session");
+			return "redirect:/login";
+		}
+	}
 }

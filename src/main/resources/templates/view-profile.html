@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="JspGram - Profile Page">
+    <title>JspGram - View Profile</title>
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+   <link rel="stylesheet" href="/css/view-profile.css">
+</head>
+<body>
+   
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <a href="/home"><img src="/images/jspgram-logo.png" alt="JspGram Logo"></a>
+            </div>
+            <div class="nav-right">
+                <a href="/home"><button class="profile-button">Home</button></a>
+                <a href="/logout"><button class="logout-button">Logout</button></a>
+            </div>
+        </div>
+    </nav>
+    <div class="message">
+        <h3 class="success-message" th:text="${session.pass}"></h3>
+        <h3 class="error-message" th:text="${session.fail}"></h3>
+        <th:block th:text="${@messageRemover.remove()}"></th:block>
+    </div>
+    <main class="profile-container">
+        <section class="profile-header">
+            <img th:if="${user.imageUrl==null}"  src="https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png" alt="Profile Picture" class="profile-picture">
+            <img th:if="${user.imageUrl}"  th:src="${user.imageUrl}" alt="Profile Picture" class="profile-picture">
+            <div class="profile-info">
+                <h1 th:text="${user.username}"></h1>
+                <p th:text="${user.email}"></p>
+                <p th:if="${user.bio}">Bio: <span th:text="${user.bio}"></span> </p>
+                <a th:if="${!user.isFollowing()}" th:href="'/follow/'+${user.id}"><button>Follow</button></a>
+            <a th:if="${user.isFollowing()}" th:href="'/unfollow/'+${user.id}"><button>Un-Follow</button></a>
+            </div>
+            
+        </section>
+        <section class="stats-container">
+            <div class="stat-item">
+                <h3>Posts</h3>
+                <span th:if="${posts==null}">0</span>
+                <span th:if="${posts}" th:text="${posts.size()}"></span>
+            </div>
+            <div class="stat-item">
+               <h3>Followers</h3>
+                <span th:text="${user.followers.size()}"></span>
+            </div>
+            <div class="stat-item">
+               <h3>Following</h3>
+                <span th:text="${user.following.size()}"></span>
+            </div>
+        </section>
+        <div th:if="${posts}">
+            <h1>My Posts</h1>
+            <div th:each="post:${posts}">
+                <img th:src="${post.imageUrl}" height="150px" width="150px"><br>
+                <span th:text="${post.caption}"></span><br>
+                <span th:text="${post.postedTime}"></span><br>
+            </div>
+            <br>
+        </div>
+     
+        
+        
+    </main>
+</body>
+</html>

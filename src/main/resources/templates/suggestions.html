@@ -21,7 +21,7 @@
                     class="profile-picture">
             </td>
             <td th:text="${suggestion.username}"></td>
-            <td><button>View Profile</button></td>
+            <td><a th:href="'/view-profile/'+${suggestion.id}"><button>View Profile</button></a></td>
             <td><a th:href="'/follow/'+${suggestion.id}"><button>Follow</button></a></td>
         </tr>
     </table>
