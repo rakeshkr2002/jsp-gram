@@ -19,10 +19,16 @@
             <a href="/logout"><button>Logout</button> </a>
         </div>
     </nav>
+    <div class="message">
+        <h3 class="success-message" th:text="${session.pass}"></h3>
+        <h3 class="error-message" th:text="${session.fail}"></h3>
+        <th:block th:text="${@messageRemover.remove()}"></th:block>
+    </div>
     <div class="container">
         <i class="fa-solid fa-circle-check fa-2xl" style="color: #63E6BE;" ></i>
         <h1>All Caught up</h1>
     </div>
+
 
 </body>
 </html>

@@ -14,7 +14,8 @@
 }
 
 body {
-    background-color: var(--background-color);
+    /* background-color: var(--background-color); */
+   background-image: url(/images/mesh-757.png);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -32,7 +33,7 @@ body {
 }
 
 .login-container {
-    background-color: white;
+    background-color: whitesmoke;
     padding: 2rem;
     border-radius: 1px;
     border: 1px solid #dbdbdb;
@@ -112,7 +113,7 @@ body {
 
 .footer {
     margin-top: 2rem;
-    color: #8e8e8e;
+    color: black;
     font-size: 0.75rem;
     text-align: center;
 }

@@ -90,4 +90,18 @@ public class AppController {
 		return service.loadPost(session);
 	}
 
+	@GetMapping("/delete/{id}")
+	public String deletePost(@PathVariable int id ,HttpSession session){
+		return service.deletePost(id,session);
+	}
+
+	@GetMapping("/follow/{id}")
+	public String follow(@PathVariable int id,HttpSession session){
+		return service.followUser(id,session);
+	}
+
+	@GetMapping("/suggestions")
+	public String suggestions(HttpSession session,ModelMap map){
+		return service.viewSuggestions(session,map);
+	}
 }
