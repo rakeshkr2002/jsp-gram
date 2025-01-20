@@ -6,7 +6,6 @@
 
 body {
     font-family: Arial, sans-serif;
-    /* background-color: #f2f2f2; */
     background-image: url(/images/signup.png);
     font-weight: 500;
     display: flex;
@@ -14,6 +13,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    padding: 2rem 0;
 }
 
 .register-container {
@@ -21,9 +21,13 @@ body {
     height: 99vh;
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 320px;
+   
     margin: auto;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
 }
 
 .register-container h2 {
@@ -83,3 +87,5 @@ body {
 input{
     background-color:aliceblue;
 }
+
+

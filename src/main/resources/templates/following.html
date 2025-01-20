@@ -4,16 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-         img{
-            height: 100px;
-        width: 100px;
-        }
-    </style>
+  <link rel="stylesheet" href="/css/following.css">
 </head>
 <body>
     <h1>Following</h1>
-    <table border="1">
+    <table >
         <tr th:each="user:${following}">
             <td><img th:if="${user.imageUrl==null}"
                 src="https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png"

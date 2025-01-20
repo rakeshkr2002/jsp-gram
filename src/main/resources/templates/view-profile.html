@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,20 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="JspGram - Profile Page">
     <title>JspGram - View Profile</title>
+
     <link rel="icon" type="image/png" href="/images/favicon.png">
-   <link rel="stylesheet" href="/css/view-profile.css">
+<link rel="stylesheet" href="/css/view-profile.css">
+    
 </head>
+
 <body>
    
-    <nav class="navbar">
-        <div class="nav-content">
-            <div class="logo">
-                <a href="/home"><img src="/images/jspgram-logo.png" alt="JspGram Logo"></a>
-            </div>
-            <div class="nav-right">
-                <a href="/home"><button class="profile-button">Home</button></a>
-                <a href="/logout"><button class="logout-button">Logout</button></a>
-            </div>
+    <nav>
+        <div class="home">
+          <!-- <a href="/home">Home</a>   -->
+          <img src="/images/jspgram-logo.png" alt="" height="120px">
+        </div>
+        <div class="menu">
+            <a href="/profile"> <button>profile</button> </a>
+            <a href="/logout"><button>Logout</button> </a>
         </div>
     </nav>
     <div class="message">
@@ -33,12 +36,12 @@
             <div class="profile-info">
                 <h1 th:text="${user.username}"></h1>
                 <p th:text="${user.email}"></p>
-                <p th:if="${user.bio}">Bio: <span th:text="${user.bio}"></span> </p>
+                <p th:if="${user.bio}">Bio: <span th:text="${user.bio}"></span></p>
                 <a th:if="${!user.isFollowing()}" th:href="'/follow/'+${user.id}"><button>Follow</button></a>
-            <a th:if="${user.isFollowing()}" th:href="'/unfollow/'+${user.id}"><button>Un-Follow</button></a>
+                <a th:if="${user.isFollowing()}" th:href="'/unfollow/'+${user.id}"><button>Un-Follow</button></a>
             </div>
-            
         </section>
+
         <section class="stats-container">
             <div class="stat-item">
                 <h3>Posts</h3>
@@ -54,18 +57,17 @@
                 <span th:text="${user.following.size()}"></span>
             </div>
         </section>
-        <div th:if="${posts}">
+
+        <section th:if="${posts}" class="posts-section">
             <h1>My Posts</h1>
-            <div th:each="post:${posts}">
-                <img th:src="${post.imageUrl}" height="150px" width="150px"><br>
-                <span th:text="${post.caption}"></span><br>
-                <span th:text="${post.postedTime}"></span><br>
+            <div class="post-grid">
+                <div th:each="post:${posts}" class="post-item">
+                    <img th:src="${post.imageUrl}" alt="Post Image">
+                    <span th:text="${post.caption}"></span>
+                    <span th:text="${post.postedTime}"></span>
+                </div>
             </div>
-            <br>
-        </div>
-     
-        
-        
+        </section>
     </main>
 </body>
 </html>

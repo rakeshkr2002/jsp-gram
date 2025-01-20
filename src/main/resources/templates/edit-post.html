@@ -4,18 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/edit-post.css">
 </head>
 <body>
     <h1>Update Post</h1>
-    <div>
+    <div class="container">
         <form action="/update-post" method="post" enctype="multipart/form-data">
             <input type="hidden" th:value="${post.id}" name="id">
-            <img th:src="${post.imageUrl}" height="150px" width="150px"><br>
-            Image (Leave Blank if Dont want to change) : <input type="file" name="image">
-        <br><br>
-        Caption: <input type="text" th:value="${post.caption}" name="caption" required>
-        <br><br>
-        <button>Update</button>
+            <img th:src="${post.imageUrl}" height="150px" width="150px">
+            <div class="form-group">
+                <label>Image (Leave Blank if Don't want to change)</label>
+                <input type="file" name="image">
+            </div>
+            <div class="form-group">
+                <label>Caption</label>
+                <input type="text" th:value="${post.caption}" name="caption" required>
+            </div>
+            <button>Update</button>
         </form>
     </div>
 </body>

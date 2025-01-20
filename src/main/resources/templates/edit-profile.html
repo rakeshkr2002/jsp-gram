@@ -4,12 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/edit-profile.css">
 </head>
 <body>
     <form action="/update-profile" method="post" enctype="multipart/form-data">
-        Profile Picture : <input type="file" name="image"required><br><br>
-        Bio : <input type="text" name="bio" required><br><br>
-     <button>Update</button>
+        <div class="form-group">
+            <label>Profile Picture</label>
+            <input type="file" name="image" required>
+        </div>
+        <div class="form-group">
+            <label>Bio</label>
+            <input type="text" name="bio" required>
+        </div>
+        <button>Update Profile</button>
     </form>
 </body>
 </html>
