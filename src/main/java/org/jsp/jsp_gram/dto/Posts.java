@@ -7,6 +7,7 @@ import java.util.List;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -35,6 +36,9 @@ public class Posts {
 
     	@ManyToMany(fetch = FetchType.EAGER)
 	List<User> likedUsers = new ArrayList<User>();
+
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	List<Comment> comments = new ArrayList<Comment>();
 	
 	public boolean hasLiked(int id) {
 		for (User likedUser : likedUsers) {

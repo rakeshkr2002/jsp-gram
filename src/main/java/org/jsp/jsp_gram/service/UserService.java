@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.jsp.jsp_gram.dto.Comment;
 import org.jsp.jsp_gram.dto.Posts;
 import org.jsp.jsp_gram.dto.User;
 import org.jsp.jsp_gram.helper.AES;
@@ -415,6 +416,36 @@ public class UserService {
 					break;
 				}
 			}
+			postRepository.save(post);
+			return "redirect:/home";
+		} else {
+			session.setAttribute("fail", "Invalid Session");
+			return "redirect:/login";
+		}
+	}
+
+	public String loadCommentPage(int id, HttpSession session, ModelMap map) {
+		User user = (User) session.getAttribute("user");
+		if (user != null) {
+			map.put("id", id);
+			return "comment.html";
+		} else {
+			session.setAttribute("fail", "Invalid Session");
+			return "redirect:/login";
+		}
+	}
+
+	public String comment(int id, HttpSession session, String comment) {
+		User user = (User) session.getAttribute("user");
+		if (user != null) {
+			Posts post = postRepository.findById(id).get();
+			
+			Comment userComment= new Comment();
+			userComment.setComment(comment);
+			
+			userComment.setUser(user);
+			
+			post.getComments().add(userComment);
 			postRepository.save(post);
 			return "redirect:/home";
 		} else {

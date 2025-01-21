@@ -143,4 +143,13 @@ public class AppController {
 	public String dislikePost(@PathVariable int id,HttpSession session) {
 		return service.dislikePost(id,session);
 	}
+
+	@GetMapping("/comment/{id}")
+	public String loadCommentPage(@PathVariable int id, HttpSession session, ModelMap map) {
+		return service.loadCommentPage(id, session, map);
+	}
+	@PostMapping("/comment/{id}")
+    public String comment(@PathVariable int id, HttpSession session, @RequestParam String comment) {
+        return service.comment(id, session, comment);
+    }
 }

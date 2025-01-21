@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment</title>
+</head>
+<body>
+    <form th:action="@{'/comment/' + ${id}}" method="post">
+        Comment: <input type="text" name="comment" placeholder="Enter Message" required>
+        <button type="submit">Post Comment</button>
+    </form>
+</body>
+</html>

@@ -43,8 +43,13 @@
                     <a th:if="${post.hasLiked(session.user.id)}" th:href="'/dislike/'+${post.id}">
                         <button class="action-button like-button">Dislike</button>
                     </a>
-                    <button class="action-button comment-button">Comment</button>
-                </div>
+  
+                    <span th:text="${post.comments.size()}"></span>
+                    <a th:href="'/comment/'+${post.id}"><button class="action-button comment-button">Comment</button></a>
+                    <div th:each="comment:${post.comments}">
+                        <span th:text="${comment.user.username}"></span>
+                        <span th:text="${comment.comment}"></span> 
+                    </div>                </div>
             </div>
         </div>
 
