@@ -54,6 +54,7 @@ public class User {
 	private boolean verified;
     private String imageUrl;
     private String bio;
+    private boolean prime;
 
 
  @ManyToMany(fetch = FetchType.EAGER)

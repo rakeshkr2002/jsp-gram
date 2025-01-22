@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.json.JSONObject;
 import org.jsp.jsp_gram.dto.Comment;
 import org.jsp.jsp_gram.dto.Posts;
 import org.jsp.jsp_gram.dto.User;
@@ -18,6 +19,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.razorpay.Order;
+import com.razorpay.RazorpayClient;
+import com.razorpay.RazorpayException;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -448,6 +453,39 @@ public class UserService {
 			post.getComments().add(userComment);
 			postRepository.save(post);
 			return "redirect:/home";
+		} else {
+			session.setAttribute("fail", "Invalid Session");
+			return "redirect:/login";
+		}
+	}
+
+	public String prime(HttpSession session, ModelMap map) throws RazorpayException {
+		User user = (User) session.getAttribute("user");
+		if (user != null) {
+			RazorpayClient client = new RazorpayClient("rzp_test_1Oxkf1xAl5FLVT", "JG3x9vjvWXPELoUeD3664wFf");
+			JSONObject object = new JSONObject();
+			object.put("amount", 19900);
+			object.put("currency", "INR");
+			Order order = client.orders.create(object);
+			map.put("key", "rzp_test_1Oxkf1xAl5FLVT");
+			map.put("amount", order.get("amount"));
+			map.put("currency", order.get("currency"));
+			map.put("orderId", order.get("id"));
+			map.put("user", user);
+			return "payment.html";
+		} else {
+			session.setAttribute("fail", "Invalid Session");
+			return "redirect:/login";
+		}
+	}
+	public String prime(HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		if (user != null) {
+			user.setPrime(true);
+			repository.save(user);
+			
+			session.setAttribute("user", user);
+			return "redirect:/profile";
 		} else {
 			session.setAttribute("fail", "Invalid Session");
 			return "redirect:/login";
